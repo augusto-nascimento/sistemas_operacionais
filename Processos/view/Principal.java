@@ -11,8 +11,12 @@ public class Principal {
 //		String os = pCont.os();
 //		System.out.println(os);
 //		pCont.propriedades();
-		String caminhoProcesso = "C:\\Windows\\regedit.exe";
-		pCont.chamaProcesso(caminhoProcesso);
+//		String caminhoProcesso = "C:\\Windows\\regedit.exe";
+//		pCont.chamaProcesso(caminhoProcesso);
+//		String caminhoProcesso = "TASKLIST /FO TABLE";
+//		pCont.LeProcesso(caminhoProcesso);
+		String processo = "notepad.exe";
+		pCont.mataProcesso(processo);
 	}
 
 }

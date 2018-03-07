@@ -1,6 +1,9 @@
 package controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Properties;
 import java.util.Set;
 
@@ -46,5 +49,35 @@ public class ProcController {
 				JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO",JOptionPane.ERROR_MESSAGE);
 			}
 		}
+	}
+	public void LeProcesso(String caminhoProcesso) {
+		try {
+			Process processo = Runtime.getRuntime().exec(caminhoProcesso);
+			InputStream fluxo  = processo.getInputStream();
+			InputStreamReader leitor = new InputStreamReader(fluxo);
+			BufferedReader buffer = new BufferedReader(leitor);
+			String linha = buffer.readLine();
+			while (linha != null) {
+				System.out.println(linha);
+				linha = buffer.readLine();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public void mataProcesso(String processo) {
+		String cmdPid = "TASKKILL /PID ";
+		String cmdNome = "TASKKILL /IM ";
+		int pid = 0;
+		StringBuffer buffer = new StringBuffer();
+		try {
+			pid = Integer.parseInt(cmdPid);
+			buffer.append(cmdPid);
+			buffer.append(pid);
+		} catch (NumberFormatException e) {
+			buffer.append(cmdNome);
+			buffer.append(processo);
+		}
+		chamaProcesso(buffer.toString());
 	}
 }
